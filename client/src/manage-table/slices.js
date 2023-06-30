@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const tasksSlice = createSlice({
   name: "tasks",
@@ -39,5 +39,6 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { addTask, updateTaskStatus, removeTask, updateTask } = tasksSlice.actions;
+export const { addTask, updateTaskStatus, removeTask, updateTask } =
+  tasksSlice.actions;
 export default tasksSlice.reducer;

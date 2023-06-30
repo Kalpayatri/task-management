@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from "@mui/material";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+} from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { validationSchema } from "../utilis/validationSchema";
 
@@ -33,7 +40,11 @@ const EditModal = ({ editedTask, isOpen, onClose, onUpdateTask }) => {
                 name="date"
                 margin="normal"
               />
-              <ErrorMessage name="date" component="div" className="text-red-500" />
+              <ErrorMessage
+                name="date"
+                component="div"
+                className="text-red-500"
+              />
             </div>
             <div>
               <Field
@@ -43,7 +54,11 @@ const EditModal = ({ editedTask, isOpen, onClose, onUpdateTask }) => {
                 name="title"
                 margin="normal"
               />
-              <ErrorMessage name="title" component="div" className="text-red-500" />
+              <ErrorMessage
+                name="title"
+                component="div"
+                className="text-red-500"
+              />
             </div>
             <div>
               <Field
@@ -53,9 +68,15 @@ const EditModal = ({ editedTask, isOpen, onClose, onUpdateTask }) => {
                 name="description"
                 margin="normal"
               />
-              <ErrorMessage name="description" component="div" className="text-red-500" />
+              <ErrorMessage
+                name="description"
+                component="div"
+                className="text-red-500"
+              />
             </div>
-            <Button type="submit" variant="contained" color="primary">Update</Button>
+            <Button type="submit" variant="contained" color="primary">
+              Update
+            </Button>
             <DialogActions>
               <Button onClick={onClose}>Cancel</Button>
             </DialogActions>

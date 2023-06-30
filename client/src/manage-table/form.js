@@ -5,7 +5,7 @@ import { TextField, Button } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { validationSchema } from "../utilis/validationSchema";
 
-const FormModal = ({closeAddModal}) => {
+const FormModal = ({ closeAddModal }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
@@ -36,7 +36,6 @@ const FormModal = ({closeAddModal}) => {
               margin="normal"
               error={errors.title && touched.title}
               helperText={errors.title && touched.title && errors.title}
-              width="100%"
             />
           </div>
           <div>
@@ -48,7 +47,6 @@ const FormModal = ({closeAddModal}) => {
               margin="normal"
               error={errors.date && touched.date}
               helperText={errors.date && touched.date && errors.date}
-              width="100%"
             />
           </div>
           <div>
@@ -60,8 +58,9 @@ const FormModal = ({closeAddModal}) => {
               margin="normal"
               multiline
               error={errors.description && touched.description}
-              helperText={errors.description && touched.description && errors.description}
-              width="100%"
+              helperText={
+                errors.description && touched.description && errors.description
+              }
             />
           </div>
           <Button type="submit" variant="contained" color="primary">

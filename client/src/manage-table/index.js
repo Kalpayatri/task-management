@@ -11,7 +11,7 @@ import {
   MenuItem,
   Select,
   InputLabel,
-  TextField
+  TextField,
 } from "@mui/material";
 import FormModal from "./form";
 import EditIcon from "@mui/icons-material/Edit";
@@ -77,10 +77,9 @@ const ManageTable = () => {
   };
 
   const filteredTasks = tasks.filter((task) => {
-    const lowercaseTitle = task.title?.toLowerCase() || ""; // Handle undefined title
+    const lowercaseTitle = task.title?.toLowerCase() || ""; 
     const lowercaseSearchText = searchText.toLowerCase();
-    const lowercaseDate = task.date?.toLowerCase() || ""; // Handle undefined date
-  
+    const lowercaseDate = task.date?.toLowerCase() || ""; 
     return (
       lowercaseTitle.includes(lowercaseSearchText) ||
       lowercaseSearchText.includes(lowercaseTitle) ||
@@ -88,28 +87,27 @@ const ManageTable = () => {
     );
   });
 
-
   return (
     <div className="container mx-auto">
       <div className="flex justify-between items-center border-b-2 pb-4 mb-4">
         <h1 className="text-3xl font-bold">Task Management</h1>
         <div className="flex items-center">
-        <div className="mr-4 mt-3">
-          <TextField
-            label="Search by Title"
-            variant="outlined"
-            size="small"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
+          <div className="mr-4 mt-3">
+            <TextField
+              label="Search by Title"
+              variant="outlined"
+              size="small"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+          </div>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 mt-3 rounded-full"
+            onClick={openAddModal}
+          >
+            Add New Task
+          </button>
         </div>
-        <button
-          className="bg-blue-500 text-white px-4 py-2 mt-3 rounded-full"
-          onClick={openAddModal}
-        >
-          Add New Task
-        </button>
-      </div>
       </div>
 
       <div className="container mx-auto bg-blue-100 p-4">
@@ -128,7 +126,7 @@ const ManageTable = () => {
               {filteredTasks.map((task) => (
                 <tr key={task.id}>
                   <td className="p-8">{task.date}</td>
-                  <td >{task.title}</td>
+                  <td>{task.title}</td>
                   <td>{task.description}</td>
                   <td>
                     <FormControl className="w-full p-12">
@@ -136,7 +134,7 @@ const ManageTable = () => {
                         Select Status
                       </InputLabel>
                       <Select
-                      label="Select Status"
+                        label="Select Status"
                         value={task.status}
                         onChange={(e) =>
                           handleStatusChange(task.id, e.target.value)
@@ -175,7 +173,10 @@ const ManageTable = () => {
       <Dialog open={isAddModalOpen} onClose={closeAddModal} fullWidth>
         <DialogTitle>Add New Task</DialogTitle>
         <DialogContent>
-          <FormModal onSubmit={handleSubmitForm} closeAddModal={closeAddModal}/>
+          <FormModal
+            onSubmit={handleSubmitForm}
+            closeAddModal={closeAddModal}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={closeAddModal}>Cancel</Button>
