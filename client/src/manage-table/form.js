@@ -1,55 +1,76 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../manage-table/slices";
 import { TextField, Button } from "@mui/material";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { validationSchema } from "../utilis/validationSchema";
 
-const Form = () => {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [description, setDescription] = useState("");
+const FormModal = ({closeAddModal}) => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (values, { resetForm }) => {
     const newTask = {
-      title,
-      date,
-      description,
+      title: values.title,
+      date: values.date,
+      description: values.description,
     };
     dispatch(addTask(newTask));
-    setTitle("");
-    setDate("");
-    setDescription("");
+    resetForm();
+    closeAddModal();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        label="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        fullWidth
-        margin="normal"
-      />
-      <Button type="submit" variant="contained" color="primary">
-        Add Task
-      </Button>
-    </form>
+    <Formik
+      initialValues={{ title: "", date: "", description: "" }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ errors, touched }) => (
+        <Form>
+          <div>
+            <Field
+              as={TextField}
+              name="title"
+              label="Title"
+              fullWidth
+              margin="normal"
+              error={errors.title && touched.title}
+              helperText={errors.title && touched.title && errors.title}
+              width="100%"
+            />
+          </div>
+          <div>
+            <Field
+              as={TextField}
+              name="date"
+              label="Date"
+              fullWidth
+              margin="normal"
+              error={errors.date && touched.date}
+              helperText={errors.date && touched.date && errors.date}
+              width="100%"
+            />
+          </div>
+          <div>
+            <Field
+              as={TextField}
+              name="description"
+              label="Description"
+              fullWidth
+              margin="normal"
+              multiline
+              error={errors.description && touched.description}
+              helperText={errors.description && touched.description && errors.description}
+              width="100%"
+            />
+          </div>
+          <Button type="submit" variant="contained" color="primary">
+            Add Task
+          </Button>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
-export default Form;
+export default FormModal;
