@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from 'uuid';
 
 const tasksSlice = createSlice({
   name: "tasks",
@@ -6,7 +7,13 @@ const tasksSlice = createSlice({
   reducers: {
     addTask: (state, action) => {
       const { date, title, description } = action.payload;
-      state.push({ date, title, description });
+      const newTask = {
+        id: uuidv4(),
+        date,
+        title,
+        description,
+      };
+      state.push(newTask);
     },
 
     updateTaskStatus: (state, action) => {
@@ -32,6 +39,5 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { addTask, updateTaskStatus, removeTask, updateTask } =
-  tasksSlice.actions;
+export const { addTask, updateTaskStatus, removeTask, updateTask } = tasksSlice.actions;
 export default tasksSlice.reducer;
